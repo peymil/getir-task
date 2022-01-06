@@ -7,10 +7,10 @@
     "module": "commonjs",
     "target": "es2021",
     "outDir": "dist",
-    "rootDirs": ["src", "test"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   }
 }

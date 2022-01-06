@@ -1,0 +1,7 @@
+FROM node:14
+
+WORKDIR /node-app
+COPY package.json .
+RUN yarn
+COPY . .
+CMD yarn test
