@@ -1,4 +1,6 @@
 import dotenv from 'dotenv';
-import example from './example';
+import connectToMongo from './connections/mongodb';
+import createServer from './server';
+
 dotenv.config();
-console.log(example());
+connectToMongo(process.env.MONGODB_URL).then(createServer).catch(console.error);
