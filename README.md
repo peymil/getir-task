@@ -1,4 +1,4 @@
-An app that fetches data from MongoDB collection and returns.
+An app that fetches data from MongoDB collection and returns data.
 
 ## Starting project
 
