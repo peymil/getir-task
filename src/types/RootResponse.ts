@@ -1,7 +1,7 @@
 type RootResponse = {
   code: number;
   msg: string;
-  records: Records[];
+  records?: Records[];
 };
 
 type Records = {
