@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node --transpile-only src/index.ts",
     "build": "tsc",
-    "test": "jest",
+    "test": "sudo docker-compose up  --remove-orphans --exit-code-from api --build",
+    "test:inside-docker": "jest",
     "lint": "eslint && tsc --noEmit",
     "lint:fix": "tsc --noEmit && eslint --cache --fix && prettier --write",
     "lint:staged": "lint-staged"

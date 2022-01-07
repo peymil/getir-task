@@ -4,4 +4,4 @@ WORKDIR /node-app
 COPY package.json .
 RUN yarn
 COPY . .
-CMD yarn test
+CMD yarn test:inside-docker
