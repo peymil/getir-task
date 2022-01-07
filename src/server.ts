@@ -1,12 +1,12 @@
 import express from 'express';
-import connectToMongo, { MongoCollectionsAndClient } from './connections/mongodb';
+import { MongoCollectionsAndClient } from './connections/mongodb';
 import { EMPTY_BODY, MIN_COUNT_GREATER, NO_RESULT, START_DATE_GREATER, SUCCESS } from './constants/errorCodes';
 import { RootProjectiledRecordFields } from './types/MongoRecordsFields';
 import RootRequest from './types/RootRequest';
 import RootResponse from './types/RootResponse';
 import isObjectEmpty from './utils/isObjectEmpty';
 
-const createServer = ({ mongoClient, mongoCollections }: MongoCollectionsAndClient) => {
+const createServer = ({ mongoCollections }: MongoCollectionsAndClient) => {
   const app = express();
   app.use(express.json());
 
