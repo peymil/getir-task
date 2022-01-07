@@ -9,11 +9,11 @@ const getCollections = (mongodb: Db) => {
 };
 
 const connectToMongo = async (url: string) => {
-  const client = new MongoClient(url);
-  await client.connect();
-  const db = client.db();
-  const collections = getCollections(db);
-  return collections;
+  const mongoClient = new MongoClient(url);
+  await mongoClient.connect();
+  const db = mongoClient.db();
+  const mongoCollections = getCollections(db);
+  return { mongoCollections, mongoClient };
 };
-export type MongoCollections = Awaited<ReturnType<typeof connectToMongo>>;
+export type MongoCollectionsAndClient = Awaited<ReturnType<typeof connectToMongo>>;
 export default connectToMongo;
