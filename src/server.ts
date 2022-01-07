@@ -18,7 +18,9 @@ const createServer = ({ mongoCollections }: MongoCollectionsAndClient) => {
     const startDateObj = new Date(startDate);
     const endDateObj = new Date(endDate);
 
+    // If min count is greater than maxCount
     if (minCount > maxCount) return res.json(MIN_COUNT_GREATER);
+    // If startDate is greater than endDate
     if (startDateObj > endDateObj) return res.json(START_DATE_GREATER);
 
     const records = await mongoCollections.records
@@ -36,9 +38,12 @@ const createServer = ({ mongoCollections }: MongoCollectionsAndClient) => {
       return true;
     });
 
+    // If there is data
     if (countFilteredRecords.length > 0) {
       return res.json({ ...SUCCESS, records: countFilteredRecords });
     }
+
+    // If there is no data
     return res.json(NO_RESULT);
   });
 

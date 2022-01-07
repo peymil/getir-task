@@ -1,8 +1,28 @@
 An app that fetches data from MongoDB collection and returns.
 
+## Starting project
+
+```
+yarn && yarn build && yarn start
+```
+
+## Testing project
+
+```
+yarn && yarn test
+```
+
+Docker should be installed.
+
+## Starting project
+
+```
+yarn && yarn build && yarn start
+```
+
 ## API Reference
 
-`POST /dependencybot/subscribe`
+`POST /`
 
 **Input example**
 
@@ -19,7 +39,7 @@ An app that fetches data from MongoDB collection and returns.
 
 ```json
 {
-  "code": 0, //Error codes defined below "error codes" title
+  "code": 0, //Error code
   "msg": "Success",
   "records": [
     {
@@ -38,6 +58,12 @@ An app that fetches data from MongoDB collection and returns.
 
 ## Error Codes
 
+Error codes and their descriptions are available under src/constants/errorCodes
+
 ## Notes
 
 Docker used for testing.
+
+Fill .env file according to .env.example before starting.
+
+.env file is not loading on production. Pass env files manually.
