@@ -1,4 +1,3 @@
-import { resolve } from 'path/posix';
 import request from 'supertest';
 import { Server } from 'http';
 import { Express } from 'express';
