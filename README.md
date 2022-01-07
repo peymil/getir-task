@@ -64,6 +64,6 @@ Error codes and their descriptions are available under src/constants/errorCodes
 
 Docker used for testing.
 
-Fill .env file according to .env.example before starting.
+You can fill .env file according to .env.example before starting.
 
-.env file is not loading on production. Pass env files manually.
+.env file is not loading on production. You should pass env variables manually.
