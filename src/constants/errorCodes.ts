@@ -4,6 +4,7 @@ export enum ErrorCodes {
   EMPTY_BODY,
   MIN_COUNT_GREATER,
   START_DATE_GREATER,
+  INVALID_BODY,
 }
 export const SUCCESS = {
   code: ErrorCodes.SUCCESS,
@@ -24,4 +25,8 @@ export const MIN_COUNT_GREATER = {
 export const START_DATE_GREATER = {
   code: ErrorCodes.START_DATE_GREATER,
   msg: 'Start date is greater than max count',
+};
+export const INVALID_BODY = {
+  code: ErrorCodes.INVALID_BODY,
+  msg: 'Body is invalid',
 };

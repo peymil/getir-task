@@ -5,7 +5,14 @@ import connectToMongo, { MongoCollectionsAndClient } from '../src/connections/mo
 import createServer from '../src/server';
 import mockData from './mockData.json';
 import RootResponse from '../src/types/RootResponse';
-import { SUCCESS, NO_RESULT, EMPTY_BODY, START_DATE_GREATER, MIN_COUNT_GREATER } from '../src/constants/errorCodes';
+import {
+  SUCCESS,
+  NO_RESULT,
+  EMPTY_BODY,
+  START_DATE_GREATER,
+  MIN_COUNT_GREATER,
+  INVALID_BODY,
+} from '../src/constants/errorCodes';
 
 describe('POST / (get data from mongodb)', () => {
   let mongoCollections: MongoCollectionsAndClient['mongoCollections'];
@@ -110,5 +117,48 @@ describe('POST / (get data from mongodb)', () => {
 
     expect(body.code).toEqual(EMPTY_BODY.code);
     expect(body.msg).toEqual(EMPTY_BODY.msg);
+  });
+  it('Should return error message if body is not JSON', async () => {
+    const res = await request(app).post('/').set('Content-Type', 'application/json').send('DASASDF');
+    const body = res.body as RootResponse;
+
+    expect(body.code).toBe(INVALID_BODY.code);
+    expect(body.msg).toBe(INVALID_BODY.msg);
+  });
+  it('Should return error message if startDate is not a date', async () => {
+    const res = await request(app)
+      .post('/')
+      .send({ endDate: '2018-06-02', startDate: 'ASDFASD', minCount: 2700, maxCount: 3000 });
+    const body = res.body as RootResponse;
+
+    expect(body.code).toBe(INVALID_BODY.code);
+    expect(body.msg).toBe(INVALID_BODY.msg);
+  });
+  it('Should return error message if endDate is not a date', async () => {
+    const res = await request(app)
+      .post('/')
+      .send({ endDate: 'ASDFASDFSAD', startDate: '2018-02-02', minCount: 2700, maxCount: 3000 });
+    const body = res.body as RootResponse;
+
+    expect(body.code).toBe(INVALID_BODY.code);
+    expect(body.msg).toBe(INVALID_BODY.msg);
+  });
+  it('Should return error message if minCount is not a number', async () => {
+    const res = await request(app)
+      .post('/')
+      .send({ endDate: '2018-06-02', startDate: '2018-02-02', minCount: 'String', maxCount: 3000 });
+    const body = res.body as RootResponse;
+
+    expect(body.code).toBe(INVALID_BODY.code);
+    expect(body.msg).toBe(INVALID_BODY.msg);
+  });
+  it('Should return error message if maxCount is not a number', async () => {
+    const res = await request(app)
+      .post('/')
+      .send({ endDate: '2018-06-02', startDate: '2018-02-02', minCount: 2700, maxCount: '2018-02-02' });
+    const body = res.body as RootResponse;
+
+    expect(body.code).toBe(INVALID_BODY.code);
+    expect(body.msg).toBe(INVALID_BODY.msg);
   });
 });
